@@ -1,0 +1,64 @@
+﻿<head>
+    <meta charset="utf-8" />
+</head>
+
+<h2>Produktet nga Api </h2>
+<table id="products" class="table table-bordered">
+ <tr>
+<th>
+    Emri
+</th>
+<th>
+    Cmimi
+</th>
+</tr>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+
+var uri='api/Product';
+
+ $(document).ready(function(){
+ $.getJSON(uri).done(function(data){
+          draw(data);
+      });
+  });
+
+function draw(data){
+      $('#products tr#vlere').html("");
+      $.each(data,function(key,item){
+          $('#products').append("<tr id=vlere><td>" +
+          item.name + "</td><td>" +
+          item.price + "</td></tr>");
+      });
+  }
+
+
+
+   function Add(){
+       var n=$("#name1").val();
+       var p=$("#price1").val();
+
+       $.post(uri, {name: n, price:p} );
+   }
+
+
+
+</script>
+
+<br />
+
+<form> Shto Produkt :<br />
+       <input type="text" id="name1" /><br />
+       <input type="text" id="price1" /><br />
+       <input type="button" id="shtim" onclick="Add()"  value="Shto" />
+
+</form>
+
+
+
+
+  <br />
